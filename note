@@ -1,0 +1,27 @@
+#### 小程序注意事项
+
+- 小程序滚动条scroll-view
+    - 下拉加载必须要给其一个高度 固定高度不兼容长尺寸手机 推荐计算高度calc
+    - 尽量不要使用bindscroll方法获取滚动条位置 如果想要回到顶部 设置scrollTop自减
+- 小程序元素定位
+    - left  top 值必须都给 iPhone 5s 不给left值会居中
+- flex
+    - 在自适应高度要自动撑开的时候 flex=1 iphone6s的兼容性不好 用css的calc进行计算
+- textarea
+    - OPPO有个别机型在auto-height的时候 高度不能自动撑开 是微信的bug 如果没有解决 最好给其min-height
+    - 运用adjust-position获取焦点键盘自动上推的时候 键盘在当前输入行的下面 无法看到所有的输入内容 此时可以获取到键盘的高度 禁用自动上推属性 在输入的时候改变页面的高度 使其完整显示
+- 原生组件的层级最高 覆盖元素在其上的时候运用hidden属性将其隐藏
+- 组件写在分包里有时不能及时编译 需要重新编译
+- 小程序页面栈最多十层
+    - 清除堆栈用navigateBack
+    - 需要返回刷新页面列表的时候在APP的reload的对象里添加参数 navigateback后在onShow处理
+    - 达到10级用redirectTo 未达到用navigateTo
+- canvas
+    - 画网络图片的时候要用图片的临时路径
+    - 内存有限 及时清理 否则无法画图
+    - 页面颜色多次设置的时候 有些手机偶尔会出现渲染混乱的情况
+    - 层级最高 modal无法覆盖
+- 图片显示有时候会有缝隙 加上 display: block;
+- ios滚动不流畅 增加属性  -webkit-overflow-scrolling: touch; 
+- 及时回收定时器
+    - 定时器是全局的，并不是跟页面绑定的，当页面因后退被销毁时，定时器应注意手动回收
